@@ -4,7 +4,7 @@ function App() {
 
   return (
     <>
-      <div className='text-red-600'>OFFICE MANAGEMENT</div>
+      <div className='text-green-600'>OFFICE MANAGEMENT</div>
     </>
   )
 }
