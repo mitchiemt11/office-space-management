@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useOffice } from '../context/OfficeContext';
 import Layout from '../components/Layout';
 import StaffList from '../components/StaffList';
@@ -8,10 +8,9 @@ import { Staff } from '../types';
 
 const OfficePage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const navigate = useNavigate();
-  const { offices, addStaffMember, updateStaffMember, deleteStaffMember } = useOffice();
+  const { offices, addStaffMember, deleteStaffMember } = useOffice();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [editingStaff, setEditingStaff] = useState<Staff | null>(null);
+  const [_, setEditingStaff] = useState<Staff | null>(null);
 
   const office = offices.find((o) => o.id === id);
 

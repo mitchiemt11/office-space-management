@@ -10,7 +10,6 @@ interface StaffMemberCardProps {
 const StaffMemberCard: React.FC<StaffMemberCardProps> = ({
   staff,
   onEdit,
-  onDelete,
 }) => {
   return (
     <div className="flex items-center justify-between bg-white p-4 mb-2 rounded-lg">
