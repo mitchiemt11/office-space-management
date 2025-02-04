@@ -1,4 +1,11 @@
 import React, { useState } from 'react';
+import AVATAR1 from '../assets/avatar1.png';
+import AVATAR2 from '../assets/avatar2.png';
+import AVATAR3 from '../assets/avatar3.png';
+import AVATAR4 from '../assets/avatar4.png';
+import AVATAR5 from '../assets/avatar5.png';
+import AVATAR6 from '../assets/avatar6.png';
+import AVATAR7 from '../assets/avatar7.png';
 
 interface AddStaffModalProps {
   isOpen: boolean;
@@ -7,13 +14,13 @@ interface AddStaffModalProps {
 }
 
 const AVATAR_OPTIONS = [
-  '/avatar1.png',
-  '/avatar2.png',
-  '/avatar3.png',
-  '/avatar4.png',
-  '/avatar5.png',
-  '/avatar6.png',
-  '/avatar7.png',
+  AVATAR1,
+  AVATAR2,
+  AVATAR3,
+  AVATAR4,
+  AVATAR5,
+  AVATAR6,
+  AVATAR7,
 ];
 
 const AddStaffModal: React.FC<AddStaffModalProps> = ({
