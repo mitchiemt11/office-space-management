@@ -5,6 +5,7 @@ import Layout from '../components/Layout';
 import StaffList from '../components/StaffList';
 import AddStaffModal from '../components/AddStaffModal';
 import { Staff } from '../types';
+import OfficeCard from '../components/OfficeCard';
 
 const OfficePage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -20,14 +21,7 @@ const OfficePage: React.FC = () => {
 
   return (
     <Layout title={office.name} showBack>
-      <div className="bg-white rounded-lg shadow p-4 mb-4">
-        <div className="space-y-2">
-          <p className="text-gray-600">{office.phone}</p>
-          <p className="text-gray-600">{office.email}</p>
-          <p className="text-gray-600">Office Capacity: {office.capacity}</p>
-          <p className="text-gray-600">{office.address}</p>
-        </div>
-      </div>
+      <OfficeCard office={office} />
 
       <div className="mt-6">
         <div className="flex justify-between items-center mb-4">

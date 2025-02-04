@@ -1,6 +1,7 @@
 import React from 'react';
+import { Pencil, Mail, Phone, UsersRound, MapPin } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Office } from '../types';
-import { Pencil, Mail, Phone, Users, MapPin } from 'lucide-react';
 
 interface OfficeCardProps {
   office: Office;
@@ -16,14 +17,10 @@ const OfficeCard: React.FC<OfficeCardProps> = ({ office }) => {
         <div className="pl-6 pr-4 py-4 border-l-12 border-blue-400">
           <div className="flex items-center justify-between">
             <div>
-              <h2 className="text-2xl font-semibold text-gray-800">{office.name}</h2>
+              <Link to={`/office/${office.id}`} className="text-2xl font-semibold text-gray-800">{office.name}</Link>
               <div className="flex items-center mt-2 gap-2">
-                <div className="opacity-50">
-                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="currentColor"/>
-                  </svg>
-                </div>
-                <p className="text-gray-500 text-lg">
+                <UsersRound className="w-5 h-5 text-blue-900" />
+                <p className="text-gray-500 text-base">
                   <strong>{office.staffMembers.length}</strong> Staff Members in Office
                 </p>
               </div>
@@ -33,7 +30,7 @@ const OfficeCard: React.FC<OfficeCardProps> = ({ office }) => {
           <hr className="mt-4 border border-gray-200" />
           <button 
           onClick={() => setIsExpanded(!isExpanded)} 
-          className="w-full flex justify-center items-center gap-2 mt-2 text-gray-500"
+          className="w-full flex justify-center items-center gap-2 mt-2 text-gray-500 text-sm"
         >
           More info
           <svg 
@@ -58,7 +55,7 @@ const OfficeCard: React.FC<OfficeCardProps> = ({ office }) => {
               <span>{office.email}</span>
             </div>
             <div className="flex items-center gap-3">
-              <Users className="w-5 h-5 text-blue-900" />
+              <UsersRound className="w-5 h-5 text-blue-900" />
               <span>Office Capacity: {office.capacity}</span>
             </div>
             <div className="flex items-center gap-3">
@@ -74,3 +71,9 @@ const OfficeCard: React.FC<OfficeCardProps> = ({ office }) => {
 };
 
 export default OfficeCard;
+
+
+
+
+
+<UsersRound />
