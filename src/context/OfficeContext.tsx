@@ -17,6 +17,7 @@ const initialOffices: Office[] = [
     phone: '082 364 9864',
     address: '10 Willie Van Schoor Dr, Bo Oakdale, Cape Town, 7530',
     capacity: 25,
+    color: '#673AB7',
     staffMembers: [
       {
         id: '1',
@@ -57,6 +58,7 @@ const initialOffices: Office[] = [
     phone: '082 123 4567',
     address: '123 Main Street, Cape Town, 8001',
     capacity: 15,
+    color: '#673AB7',
     staffMembers: [
       {
         id: '6',
