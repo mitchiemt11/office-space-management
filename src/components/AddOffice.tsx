@@ -1,16 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-interface AddOfficeProps {
-  onAdd: (office: {
-    name: string;
-    address: string;
-    email: string;
-    phone: string;
-    capacity: string;
-    color: string;
-  }) => void;
-}
+import { useOffice } from '../context/OfficeContext';
+import { Office } from '../types';
 
 const OFFICE_COLORS = [
   '#FFC107', 
@@ -26,20 +17,31 @@ const OFFICE_COLORS = [
   '#673AB7',
 ];
 
-const AddOffice: React.FC<AddOfficeProps> = ({ onAdd }) => {
+const AddOffice: React.FC = () => {
   const navigate = useNavigate();
+  const { addOffice } = useOffice();
+  
   const [formData, setFormData] = useState({
     name: '',
     address: '',
     email: '',
     phone: '',
     capacity: '',
-    color: OFFICE_COLORS[0]
+    color: OFFICE_COLORS[0],
+    staffMembers: []
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onAdd(formData);
+    
+    // Convert capacity to number and create office object
+    const newOffice: Omit<Office, 'id'> = {
+      ...formData,
+      capacity: parseInt(formData.capacity),
+      staffMembers: []
+    };
+    
+    addOffice(newOffice);
     navigate('/');
   };
 
@@ -55,7 +57,6 @@ const AddOffice: React.FC<AddOfficeProps> = ({ onAdd }) => {
         <h1 className="text-xl">New Office</h1>
       </div>
 
-      {/* Form */}
       <form onSubmit={handleSubmit} className="p-4 space-y-4">
         <input
           type="text"
@@ -103,7 +104,6 @@ const AddOffice: React.FC<AddOfficeProps> = ({ onAdd }) => {
           min="1"
         />
 
-        {/* Color Selection */}
         <div className="mt-6">
           <h2 className="text-xl font-semibold mb-4">Office Colour</h2>
           <div className="grid grid-cols-6 gap-4">
