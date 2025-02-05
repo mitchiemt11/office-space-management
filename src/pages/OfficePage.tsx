@@ -30,9 +30,9 @@ const OfficePage: React.FC = () => {
           </h2>
           <button
             onClick={() => setIsAddModalOpen(true)}
-            className="bg-blue-500 text-white p-2 rounded-full"
+            className="bg-blue-900 text-white py-2 px-4 rounded-xl cursor-pointer"
           >
-            +
+            Add
           </button>
         </div>
 
