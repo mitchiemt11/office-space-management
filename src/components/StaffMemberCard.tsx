@@ -58,22 +58,21 @@ const StaffMemberCard: React.FC<StaffMemberCardProps> = ({
         </button>
       </div>
 
-      {/* Options Modal */}
       {isOptionsModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-25 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg w-72 overflow-hidden">
+        <div className="fixed inset-0 bg-gray-300 bg-opacity-25 flex items-center justify-center z-50">
+          <div className="bg-white py-12 px-8 rounded-lg w-72 overflow-hidden">
             <button
               onClick={() => {
                 onEdit(staff);
                 setIsOptionsModalOpen(false);
               }}
-              className="w-full px-4 py-3 text-center text-white bg-blue-500 hover:bg-blue-600 transition-colors"
+              className="w-full px-4 py-3 text-center text-white bg-blue-400 hover:bg-blue-500 transition-colors rounded-3xl"
             >
               EDIT STAFF MEMBER
-            </button>
+            </button> &nbsp;
             <button
               onClick={handleDeleteClick}
-              className="w-full px-4 py-3 text-center text-blue-500 hover:bg-gray-100 transition-colors"
+              className="w-full px-4 py-3 text-center pt-4 text-blue-500 hover:bg-gray-100 transition-colors rounded-3xl"
             >
               DELETE STAFF MEMBER
             </button>
@@ -86,9 +85,8 @@ const StaffMemberCard: React.FC<StaffMemberCardProps> = ({
         </div>
       )}
 
-      {/* Delete Confirmation Modal */}
       {isDeleteModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-25 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-gray-300 bg-opacity-25 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg w-72 overflow-hidden">
             <div className="p-4 flex items-center">
               <button
@@ -97,7 +95,7 @@ const StaffMemberCard: React.FC<StaffMemberCardProps> = ({
               >
                 <ArrowLeft className="w-5 h-5" />
               </button>
-              <h2 className="text-center flex-1 font-medium pr-6">
+              <h2 className="text-center flex-1 font-medium pr-6 ">
                 Are You Sure You Want To Delete Staff Member?
               </h2>
             </div>
@@ -107,7 +105,7 @@ const StaffMemberCard: React.FC<StaffMemberCardProps> = ({
                   onDelete(staff.id);
                   setIsDeleteModalOpen(false);
                 }}
-                className="w-full px-4 py-3 text-center text-white bg-red-500 hover:bg-red-600 rounded-lg transition-colors"
+                className="w-full px-4 py-3 text-center text-white bg-red-500 hover:bg-red-600 rounded-3xl transition-colors"
               >
                 DELETE OFFICE
               </button>
