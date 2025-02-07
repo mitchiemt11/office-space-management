@@ -115,13 +115,13 @@ const StaffMemberCard: React.FC<StaffMemberCardProps> = ({
           <div className="bg-white py-12 px-8 rounded-lg w-72 overflow-hidden">
             <button
               onClick={handleEditClick}
-              className="w-full px-4 py-3 text-center text-white bg-blue-400 hover:bg-blue-500 transition-colors rounded-3xl"
+              className="w-full px-4 py-3 text-center text-white bg-[#489DDA] hover:bg-blue-500 transition-colors rounded-3xl"
             >
               EDIT STAFF MEMBER
             </button> &nbsp;
             <button
               onClick={handleDeleteClick}
-              className="w-full px-4 py-3 text-center pt-4 text-blue-500 hover:bg-gray-100 transition-colors rounded-3xl"
+              className="w-full px-4 py-3 text-center pt-4 text-[#489DDA] hover:bg-gray-100 transition-colors rounded-3xl"
             >
               DELETE STAFF MEMBER
             </button>
@@ -135,9 +135,9 @@ const StaffMemberCard: React.FC<StaffMemberCardProps> = ({
       )}
 
       {isEditModalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-25 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg w-72 overflow-hidden">
-            <div className="p-4 flex items-center justify-between border-b">
+        <div className="fixed inset-0 bg-gray-400 bg-opacity-25 flex items-center justify-center z-50">
+          <div className="bg-gray-200 rounded-lg w-72 overflow-hidden">
+            <div className="p-4 flex items-center justify-between">
               {editStep === 'avatar' && (
                 <button
                   onClick={() => setEditStep('info')}
@@ -146,7 +146,7 @@ const StaffMemberCard: React.FC<StaffMemberCardProps> = ({
                   <ArrowLeft className="w-5 h-5" />
                 </button>
               )}
-              <h2 className="text-lg font-semibold flex-1 text-center">
+              <h2 className="text-2xl font-semibold flex-1 text-center">
                 Edit Staff Member
               </h2>
               <button
@@ -164,21 +164,23 @@ const StaffMemberCard: React.FC<StaffMemberCardProps> = ({
                   value={editForm.firstName}
                   onChange={(e) => setEditForm(prev => ({ ...prev, firstName: e.target.value }))}
                   placeholder="First Name"
-                  className="w-full mb-4 p-2 border rounded"
+                  className="w-full mb-4 p-2 bg-white rounded"
                 />
                 <input
                   type="text"
                   value={editForm.lastName}
                   onChange={(e) => setEditForm(prev => ({ ...prev, lastName: e.target.value }))}
                   placeholder="Last Name"
-                  className="w-full mb-4 p-2 border rounded"
+                  className="w-full mb-4 p-2 bg-white rounded"
                 />
+                <div className="flex items-center justify-center mb-4 mt-8">
                 <button
                   onClick={() => setEditStep('avatar')}
-                  className="w-full px-4 py-3 text-white bg-blue-500 hover:bg-blue-600 rounded transition-colors"
+                  className="w-3/4 px-2 py-3 text-white bg-[#489DDA] hover:bg-blue-500 rounded-3xl transition-colors"
                 >
                   NEXT
                 </button>
+                </div>
               </div>
             ) : (
               <div className="p-4">
@@ -198,7 +200,7 @@ const StaffMemberCard: React.FC<StaffMemberCardProps> = ({
                 </div>
                 <button
                   onClick={handleEditSubmit}
-                  className="w-full px-4 py-3 text-white bg-blue-500 hover:bg-blue-600 rounded transition-colors"
+                  className="w-full px-4 py-3 text-white bg-[#489DDA] hover:bg-blue-600 rounded transition-colors"
                 >
                   UPDATE STAFF MEMBER
                 </button>
@@ -239,7 +241,7 @@ const StaffMemberCard: React.FC<StaffMemberCardProps> = ({
               </button>
               <button
                 onClick={() => setIsDeleteModalOpen(false)}
-                className="w-full px-4 py-3 text-center text-blue-500 hover:bg-gray-100 rounded-lg transition-colors"
+                className="w-full px-4 py-3 text-center text-[#489DDA] hover:bg-gray-100 rounded-lg transition-colors"
               >
                 KEEP OFFICE
               </button>
