@@ -9,6 +9,7 @@ import AVATAR4 from '../assets/avatar4.png';
 import AVATAR5 from '../assets/avatar5.png';
 import AVATAR6 from '../assets/avatar6.png';
 import AVATAR7 from '../assets/avatar7.png';
+import StepIndicator from './StepIndicator';
 
 interface StaffMemberCardProps {
   staff: Staff;
@@ -99,7 +100,7 @@ const StaffMemberCard: React.FC<StaffMemberCardProps> = ({
             {staff.firstName} {staff.lastName}
           </span>
         </div>
-        
+
         <button
           onClick={() => setIsOptionsModalOpen(true)}
           className="p-2 hover:bg-gray-100 rounded-full transition-colors duration-200"
@@ -126,16 +127,16 @@ const StaffMemberCard: React.FC<StaffMemberCardProps> = ({
               DELETE STAFF MEMBER
             </button>
           </div>
-          
-          <div 
-            className="fixed inset-0 -z-10" 
+
+          <div
+            className="fixed inset-0 -z-10"
             onClick={() => setIsOptionsModalOpen(false)}
           />
         </div>
       )}
 
       {isEditModalOpen && (
-        <div className="fixed inset-0 bg-gray-400 bg-opacity-25 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-gray-300 bg-opacity-25 flex items-center justify-center z-50">
           <div className="bg-gray-200 rounded-lg w-72 overflow-hidden">
             <div className="p-4 flex items-center justify-between">
               {editStep === 'avatar' && (
@@ -173,43 +174,47 @@ const StaffMemberCard: React.FC<StaffMemberCardProps> = ({
                   placeholder="Last Name"
                   className="w-full mb-4 p-2 bg-white rounded"
                 />
+                <StepIndicator currentStep={editStep === 'info' ? 0 : 1} className="mb-4" />
                 <div className="flex items-center justify-center mb-4 mt-8">
-                <button
-                  onClick={() => setEditStep('avatar')}
-                  className="w-3/4 px-2 py-3 text-white bg-[#489DDA] hover:bg-blue-500 rounded-3xl transition-colors"
-                >
-                  NEXT
-                </button>
+                  <button
+                    onClick={() => setEditStep('avatar')}
+                    className="w-3/4 px-2 py-3 text-white bg-[#489DDA] hover:bg-blue-500 rounded-3xl transition-colors"
+                  >
+                    NEXT
+                  </button>
                 </div>
               </div>
             ) : (
-              <div className="p-4">
+              <div className="p-6">
                 <h3 className="text-xl font-semibold mb-4">Avatar</h3>
                 <div className="grid grid-cols-4 gap-4 mb-4">
                   {AVATARS.map((avatar, index) => (
                     <button
                       key={index}
                       onClick={() => setEditForm(prev => ({ ...prev, avatarUrl: avatar }))}
-                      className={`rounded-full overflow-hidden ${
-                        editForm.avatarUrl === avatar ? 'ring-2 ring-blue-500' : ''
-                      }`}
+                      className={`rounded-full overflow-hidden ${editForm.avatarUrl === avatar ? 'ring-4 ring-slate-700' : ''
+                        }`}
                     >
                       <img src={avatar} alt={`Avatar ${index + 1}`} className="w-full h-full object-cover" />
                     </button>
                   ))}
                 </div>
-                <button
-                  onClick={handleEditSubmit}
-                  className="w-full px-4 py-3 text-white bg-[#489DDA] hover:bg-blue-600 rounded transition-colors"
-                >
-                  UPDATE STAFF MEMBER
-                </button>
+                <StepIndicator currentStep={1} className="mb-4" />
+                
+                <div className="flex items-center justify-center mt-12 mb-4">
+                  <button
+                    onClick={handleEditSubmit}
+                    className="w-7/8 px-2 py-3 text-white bg-[#489DDA] hover:bg-blue-600 rounded-3xl transition-colors"
+                  >
+                    UPDATE STAFF MEMBER
+                  </button>
+                </div>
               </div>
             )}
           </div>
-          
-          <div 
-            className="fixed inset-0 -z-10" 
+
+          <div
+            className="fixed inset-0 -z-10"
             onClick={handleCloseEdit}
           />
         </div>
@@ -247,9 +252,9 @@ const StaffMemberCard: React.FC<StaffMemberCardProps> = ({
               </button>
             </div>
           </div>
-          
-          <div 
-            className="fixed inset-0 -z-10" 
+
+          <div
+            className="fixed inset-0 -z-10"
             onClick={() => setIsDeleteModalOpen(false)}
           />
         </div>
