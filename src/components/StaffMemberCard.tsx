@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { MoreVertical, ArrowLeft, X } from 'lucide-react';
 import { Staff } from '../types';
+import { useOffice } from '../context/OfficeContext';
 import AVATAR1 from '../assets/avatar1.png';
 import AVATAR2 from '../assets/avatar2.png';
 import AVATAR3 from '../assets/avatar3.png';
@@ -11,10 +12,8 @@ import AVATAR7 from '../assets/avatar7.png';
 
 interface StaffMemberCardProps {
   staff: Staff;
-  onEdit: (staff: Staff) => void;
-  onDelete: (id: string) => void;
+  officeId: string;
 }
-
 
 const AVATARS = [
   AVATAR1,
@@ -28,9 +27,9 @@ const AVATARS = [
 
 const StaffMemberCard: React.FC<StaffMemberCardProps> = ({
   staff,
-  onEdit,
-  onDelete,
+  officeId,
 }) => {
+  const { updateStaffMember, deleteStaffMember } = useOffice();
   const [isOptionsModalOpen, setIsOptionsModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -58,8 +57,8 @@ const StaffMemberCard: React.FC<StaffMemberCardProps> = ({
   };
 
   const handleEditSubmit = () => {
-    onEdit({
-      ...staff,
+    updateStaffMember(officeId, {
+      id: staff.id,
       firstName: editForm.firstName,
       lastName: editForm.lastName,
       avatarUrl: editForm.avatarUrl
@@ -135,11 +134,9 @@ const StaffMemberCard: React.FC<StaffMemberCardProps> = ({
         </div>
       )}
 
-      {/* Edit Modal */}
       {isEditModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-25 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg w-72 overflow-hidden">
-            {/* Header */}
             <div className="p-4 flex items-center justify-between border-b">
               {editStep === 'avatar' && (
                 <button
@@ -160,7 +157,6 @@ const StaffMemberCard: React.FC<StaffMemberCardProps> = ({
               </button>
             </div>
 
-            {/* Content */}
             {editStep === 'info' ? (
               <div className="p-4">
                 <input
@@ -234,7 +230,7 @@ const StaffMemberCard: React.FC<StaffMemberCardProps> = ({
             <div className="flex flex-col gap-2 p-4">
               <button
                 onClick={() => {
-                  onDelete(staff.id);
+                  deleteStaffMember(officeId, staff.id);
                   setIsDeleteModalOpen(false);
                 }}
                 className="w-full px-4 py-3 text-center text-white bg-red-500 hover:bg-red-600 rounded-3xl transition-colors"
