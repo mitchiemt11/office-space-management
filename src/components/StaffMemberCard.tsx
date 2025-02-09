@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MoreVertical, ArrowLeft, X } from 'lucide-react';
+import { MoreVertical, ArrowLeft, CircleX } from 'lucide-react';
 import { Staff } from '../types';
 import { useOffice } from '../context/OfficeContext';
 import AVATAR1 from '../assets/avatar1.png';
@@ -154,7 +154,7 @@ const StaffMemberCard: React.FC<StaffMemberCardProps> = ({
                 onClick={handleCloseEdit}
                 className="p-1 hover:bg-gray-100 rounded-full"
               >
-                <X className="w-5 h-5" />
+                <CircleX className="w-5 h-5" />
               </button>
             </div>
 

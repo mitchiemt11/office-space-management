@@ -1,4 +1,5 @@
 import React from 'react';
+import { Search } from 'lucide-react';
 
 interface SearchBarProps {
   value: string;
@@ -15,7 +16,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ value, onChange }) => {
         placeholder="Search staff members..."
         className="w-full p-2 pl-2 rounded-lg bg-white"
       />
-      <span className="absolute right-2 top-2.5 text-gray-400">🔍</span>
+      <span className="absolute right-2 top-2.5 text-gray-400">
+        <Search />
+      </span>
     </div>
   );
 };
