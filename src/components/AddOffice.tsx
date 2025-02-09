@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useOffice } from '../context/OfficeContext';
 import { Office } from '../types';
+import { ArrowLeft } from 'lucide-react';
 
 const OFFICE_COLORS = [
   '#FFC107', 
@@ -53,7 +54,7 @@ const AddOffice: React.FC = () => {
             onClick={() => navigate('/')}
             className="mr-4 text-gray-600"
           >
-            ←
+            <ArrowLeft className="w-8 h-5 text-gray-600" />
           </button>
           <h1 className="text-xl font-semibold w-full text-center">New Office</h1>
         </div>

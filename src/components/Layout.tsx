@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 
 interface LayoutProps {
   title: string;
@@ -19,7 +20,7 @@ const Layout: React.FC<LayoutProps> = ({ title, children, showBack = false }) =>
               onClick={() => navigate(-1)}
               className="mr-4 text-gray-600"
             >
-              ←
+              <ArrowLeft className="w-8 h-5 text-gray-600" />
             </button>
           )}
           <h1 className="text-xl font-semibold text-gray-900">{title}</h1>

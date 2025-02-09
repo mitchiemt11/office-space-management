@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useOffice } from '../context/OfficeContext';
 import Layout from '../components/Layout';
 import OfficeList from '../components/OfficeList';
+import { Plus } from 'lucide-react';
 
 
 const HomePage: React.FC = () => {
@@ -19,7 +20,7 @@ const HomePage: React.FC = () => {
           className="fixed bottom-8 right-8 w-14 h-14 bg-[#0D4477] rounded-full text-white text-3xl flex items-center justify-center shadow-lg hover:bg-[#0D4607] transition-colors"
           aria-label="Add Office"
         >
-          +
+          <Plus />
         </button>
       </div>
     </Layout>
