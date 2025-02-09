@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Office, OfficeContextType, Staff } from '../types';
 import { v4 as uuidv4 } from 'uuid';
 import AVATAR1 from '../assets/avatar1.png';
@@ -9,7 +9,8 @@ import AVATAR5 from '../assets/avatar5.png';
 import AVATAR6 from '../assets/avatar6.png';
 import AVATAR7 from '../assets/avatar7.png';
 
-const initialOffices: Office[] = [
+const STORAGE_KEY = 'offices_data';
+const DEFAULT_OFFICES: Office[] = [
   {
     id: '1',
     name: 'Specno',
@@ -65,72 +66,174 @@ const initialOffices: Office[] = [
   },
 ];
 
-const OfficeContext = createContext<OfficeContextType | undefined>(undefined);
+interface ExtendedOfficeContextType extends OfficeContextType {
+  isLoading: boolean;
+  error: string | null;
+  resetToDefault: () => void;
+}
+
+const OfficeContext = createContext<ExtendedOfficeContextType | undefined>(undefined);
+
+// Utility functions for data persistence
+const loadFromStorage = (): Office[] | null => {
+  try {
+    const storedData = localStorage.getItem(STORAGE_KEY);
+    if (storedData) {
+      return JSON.parse(storedData);
+    }
+    return null;
+  } catch (error) {
+    console.error('Error loading data from storage:', error);
+    return null;
+  }
+};
+
+const saveToStorage = (data: Office[]): void => {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch (error) {
+    console.error('Error saving data to storage:', error);
+  }
+};
 
 export const OfficeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [offices, setOffices] = useState<Office[]>(initialOffices);
+  const [offices, setOffices] = useState<Office[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const initializeData = async () => {
+      try {
+        setIsLoading(true);
+        const storedData = loadFromStorage();
+        
+        if (storedData) {
+          setOffices(storedData);
+        } else {
+          setOffices(DEFAULT_OFFICES);
+          saveToStorage(DEFAULT_OFFICES);
+        }
+      } catch (err) {
+        setError('Failed to load office data');
+        console.error('Initialization error:', err);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    initializeData();
+  }, []);
+
+  // Save to storage whenever offices change
+  useEffect(() => {
+    if (!isLoading) {
+      saveToStorage(offices);
+    }
+  }, [offices, isLoading]);
 
   const addOffice = (office: Omit<Office, 'id'>) => {
-    setOffices([...offices, { ...office, id: uuidv4() }]);
+    try {
+      const newOffices = [...offices, { ...office, id: uuidv4() }];
+      setOffices(newOffices);
+    } catch (err) {
+      setError('Failed to add office');
+    }
   };
 
   const updateOffice = (updatedOffice: Office) => {
-    setOffices(offices.map(office => 
-      office.id === updatedOffice.id ? updatedOffice : office
-    ));
+    try {
+      const newOffices = offices.map(office => 
+        office.id === updatedOffice.id ? updatedOffice : office
+      );
+      setOffices(newOffices);
+    } catch (err) {
+      setError('Failed to update office');
+    }
   };
 
   const deleteOffice = (id: string) => {
-    setOffices(offices.filter(office => office.id !== id));
+    try {
+      const newOffices = offices.filter(office => office.id !== id);
+      setOffices(newOffices);
+    } catch (err) {
+      setError('Failed to delete office');
+    }
   };
 
   const addStaffMember = (officeId: string, staff: Omit<Staff, 'id'>) => {
-    setOffices(offices.map(office => {
-      if (office.id === officeId) {
-        return {
-          ...office,
-          staffMembers: [...office.staffMembers, { ...staff, id: uuidv4() }]
-        };
-      }
-      return office;
-    }));
+    try {
+      const newOffices = offices.map(office => {
+        if (office.id === officeId) {
+          return {
+            ...office,
+            staffMembers: [...office.staffMembers, { ...staff, id: uuidv4() }]
+          };
+        }
+        return office;
+      });
+      setOffices(newOffices);
+    } catch (err) {
+      setError('Failed to add staff member');
+    }
   };
 
   const updateStaffMember = (officeId: string, updatedStaff: Staff) => {
-    setOffices(offices.map(office => {
-      if (office.id === officeId) {
-        return {
-          ...office,
-          staffMembers: office.staffMembers.map(staff =>
-            staff.id === updatedStaff.id ? updatedStaff : staff
-          )
-        };
-      }
-      return office;
-    }));
+    try {
+      const newOffices = offices.map(office => {
+        if (office.id === officeId) {
+          return {
+            ...office,
+            staffMembers: office.staffMembers.map(staff =>
+              staff.id === updatedStaff.id ? updatedStaff : staff
+            )
+          };
+        }
+        return office;
+      });
+      setOffices(newOffices);
+    } catch (err) {
+      setError('Failed to update staff member');
+    }
   };
 
   const deleteStaffMember = (officeId: string, staffId: string) => {
-    setOffices(offices.map(office => {
-      if (office.id === officeId) {
-        return {
-          ...office,
-          staffMembers: office.staffMembers.filter(staff => staff.id !== staffId)
-        };
-      }
-      return office;
-    }));
+    try {
+      const newOffices = offices.map(office => {
+        if (office.id === officeId) {
+          return {
+            ...office,
+            staffMembers: office.staffMembers.filter(staff => staff.id !== staffId)
+          };
+        }
+        return office;
+      });
+      setOffices(newOffices);
+    } catch (err) {
+      setError('Failed to delete staff member');
+    }
+  };
+
+  const resetToDefault = () => {
+    try {
+      setOffices(DEFAULT_OFFICES);
+      saveToStorage(DEFAULT_OFFICES);
+    } catch (err) {
+      setError('Failed to reset data');
+    }
   };
 
   return (
     <OfficeContext.Provider value={{
       offices,
+      isLoading,
+      error,
       addOffice,
       updateOffice,
       deleteOffice,
       addStaffMember,
       updateStaffMember,
-      deleteStaffMember
+      deleteStaffMember,
+      resetToDefault
     }}>
       {children}
     </OfficeContext.Provider>
