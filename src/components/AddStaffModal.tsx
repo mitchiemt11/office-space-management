@@ -75,6 +75,9 @@ const AddStaffModal: React.FC<AddStaffModalProps> = ({
           onClick={() => {
             onAdd(firstName, lastName, selectedAvatar);
             onClose();
+            setFirstName('');
+            setLastName('');
+            setSelectedAvatar(AVATAR_OPTIONS[0]);
           }}
           className="w-full bg-[#489DDA] text-white py-2 rounded-3xl"
         >
