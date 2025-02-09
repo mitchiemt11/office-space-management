@@ -35,8 +35,8 @@ const AddStaffModal: React.FC<AddStaffModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white rounded-lg p-6 w-full max-w-md mx-4">
+    <div className="fixed inset-0 bg-gray-400 flex items-center justify-center">
+      <div className="bg-gray-200 rounded-lg p-6 w-full max-w-md mx-4">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-semibold">New Staff Member</h2>
           <button onClick={onClose}>✕</button>
@@ -46,14 +46,14 @@ const AddStaffModal: React.FC<AddStaffModalProps> = ({
           placeholder="First Name"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
-          className="w-full p-2 border rounded mb-4"
+          className="w-full p-2 bg-white rounded mb-4"
         />
         <input
           type="text"
           placeholder="Last Name"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
-          className="w-full p-2 border rounded mb-4"
+          className="w-full p-2 bg-white rounded mb-4"
         />
         <div className="mb-4">
           <h3 className="text-lg font-medium mb-2">Avatar</h3>
@@ -76,9 +76,9 @@ const AddStaffModal: React.FC<AddStaffModalProps> = ({
             onAdd(firstName, lastName, selectedAvatar);
             onClose();
           }}
-          className="w-full bg-blue-500 text-white py-2 rounded-lg"
+          className="w-full bg-[#489DDA] text-white py-2 rounded-3xl"
         >
-          Add Staff Member
+          ADD STAFF MEMBER
         </button>
       </div>
     </div>

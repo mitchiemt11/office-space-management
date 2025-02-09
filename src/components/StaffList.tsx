@@ -5,14 +5,12 @@ import SearchBar from './SearchBar';
 
 interface StaffListProps {
   staffMembers: Staff[];
-  onEdit: (staff: Staff) => void;
-  onDelete: (id: string) => void;
+  officeId: string;
 }
 
 const StaffList: React.FC<StaffListProps> = ({
   staffMembers,
-  onEdit,
-  onDelete,
+  officeId,
 }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -31,8 +29,7 @@ const StaffList: React.FC<StaffListProps> = ({
           <StaffMemberCard
             key={staff.id}
             staff={staff}
-            onEdit={onEdit}
-            onDelete={onDelete}
+            officeId={officeId}
           />
         ))}
       </div>

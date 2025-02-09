@@ -12,6 +12,7 @@ export interface Office {
   phone: string;
   address: string;
   capacity: number;
+  color: string;
   staffMembers: Staff[];
 }
 

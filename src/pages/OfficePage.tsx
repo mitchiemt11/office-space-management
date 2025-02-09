@@ -4,14 +4,12 @@ import { useOffice } from '../context/OfficeContext';
 import Layout from '../components/Layout';
 import StaffList from '../components/StaffList';
 import AddStaffModal from '../components/AddStaffModal';
-import { Staff } from '../types';
 import OfficeCard from '../components/OfficeCard';
 
 const OfficePage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const { offices, addStaffMember, deleteStaffMember } = useOffice();
+  const { offices, addStaffMember } = useOffice();
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
-  const [_, setEditingStaff] = useState<Staff | null>(null);
 
   const office = offices.find((o) => o.id === id);
 
@@ -30,16 +28,15 @@ const OfficePage: React.FC = () => {
           </h2>
           <button
             onClick={() => setIsAddModalOpen(true)}
-            className="bg-blue-500 text-white p-2 rounded-full"
+            className="bg-blue-900 text-white py-2 px-4 rounded-xl cursor-pointer"
           >
-            +
+            Add
           </button>
         </div>
 
         <StaffList
           staffMembers={office.staffMembers}
-          onEdit={setEditingStaff}
-          onDelete={(staffId) => deleteStaffMember(office.id, staffId)}
+          officeId={office.id} 
         />
       </div>
 
