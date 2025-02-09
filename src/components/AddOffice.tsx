@@ -48,14 +48,14 @@ const AddOffice: React.FC = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
       <div className="w-full max-w-lg bg-white shadow-lg rounded-lg p-6">
-        <div className="flex items-center border-b pb-4">
+        <div className="flex items-center pb-4">
           <button 
             onClick={() => navigate('/')}
             className="mr-4 text-gray-600"
           >
             ←
           </button>
-          <h1 className="text-xl font-semibold">New Office</h1>
+          <h1 className="text-xl font-semibold w-full text-center">New Office</h1>
         </div>
 
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
@@ -125,7 +125,7 @@ const AddOffice: React.FC = () => {
             <div className="flex items-center justify-center">
           <button
             type="submit"
-            className="w-3/4 bg-blue-400 text-white py-3 rounded-3xl mt-4 font-medium hover:bg-blue-600 transition"
+            className="w-3/4 bg-[#489DDA] text-white py-3 rounded-3xl mt-4 font-medium hover:bg-blue-500 transition"
           >
             ADD OFFICE
           </button>
