@@ -118,6 +118,7 @@ const EditOffice: React.FC = () => {
             <input
               type="text"
               placeholder="Office Name"
+              data-cy="office-name"
               className="flex-1 p-3 bg-gray-100 rounded-lg"
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -185,6 +186,7 @@ const EditOffice: React.FC = () => {
                     }`}
                   style={{ backgroundColor: color }}
                   aria-label={`Select color ${color}`}
+                  data-cy="color-options"
                 />
               ))}
             </div>

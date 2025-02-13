@@ -13,6 +13,7 @@ const OfficeCard: React.FC<OfficeCardProps> = ({ office }) => {
   const navigate = useNavigate();
 
   const handleEdit = (e: React.MouseEvent) => {
+    console.log('Edit button clicked for office:', office.id);
     e.preventDefault(); // Prevent Link click propagation
     navigate(`/office/edit/${office.id}`);
   };
@@ -22,6 +23,8 @@ const OfficeCard: React.FC<OfficeCardProps> = ({ office }) => {
       <div
         className="bg-white rounded-lg shadow-sm mb-4 relative overflow-hidden"
         style={{ borderLeft: `12px solid ${office.color}` }}
+        data-cy="office-card"
+        onClick={() => navigate(`/office/${office.id}`)}
       >
         <div className="pl-6 pr-4 py-4">
           <div className="flex items-center justify-between">
@@ -36,12 +39,23 @@ const OfficeCard: React.FC<OfficeCardProps> = ({ office }) => {
                 </p>
               </div>
             </div>
-            <button 
+            <button
               onClick={handleEdit}
               className="p-2 hover:bg-gray-100 rounded-full transition-colors group"
               aria-label="Edit office"
+              data-cy="edit-office-button"
             >
-              <Pencil className="text-slate-600 w-5 h-5 group-hover:text-slate-700 transition-colors cursor-pointer" />
+              <Pencil
+                data-cy="edit-office-button"
+                className="text-red-600 w-5 h-5 group-hover:text-slate-700 transition-colors cursor-pointer"
+                onClick={handleEdit}
+                aria-label="Edit office"
+              /><Pencil
+              data-cy="edit-office-button"
+              className="text-red-600 w-5 h-5 group-hover:text-slate-700 transition-colors cursor-pointer"
+              onClick={handleEdit}
+              aria-label="Edit office"
+            />
             </button>
           </div>
           <hr className="mt-4 border border-gray-200" />
